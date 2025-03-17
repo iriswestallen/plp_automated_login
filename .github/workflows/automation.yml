@@ -1,0 +1,27 @@
+name: PLP Login Automation
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'  # Runs every 5 minutes
+
+jobs:
+  infinite_login:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: pip install python-dotenv requests
+
+      - name: Run infinite login loop
+        env:
+          PLP_EMAIL: ${{ secrets.PLP_EMAIL }}
+          PLP_PASSWORD: ${{ secrets.PLP_PASSWORD }}
+        run: |
+          while true; do
+            python login_automation.py
+            sleep 4  # 4ms delay
+          done

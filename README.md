@@ -1,1 +1,1 @@
-# plp_automated_login
+# plp-login-automation
